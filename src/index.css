@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #62df7d;
+  --color-surface-container-low: #121c2a;
+  --color-on-error: #690005;
+  --color-primary-fixed: #7ffc97;
+  --color-surface-tint: #62df7d;
+  --color-surface: #0a1422;
+  --color-error-container: #93000a;
+  --color-surface-container-lowest: #050e1c;
+  --color-secondary-fixed-dim: #98da27;
+  --color-error: #ffb4ab;
+  --color-on-tertiary-fixed-variant: #653e00;
+  --color-on-tertiary-container: #3e2400;
+  --color-secondary: #9ddf2e;
+  --color-on-secondary-fixed: #121f00;
+  --color-secondary-container: #83c300;
+  --color-surface-container: #16202f;
+  --color-surface-container-high: #212a39;
+  --color-on-error-container: #ffdad6;
+  --color-on-secondary-fixed-variant: #334f00;
+  --color-tertiary-fixed-dim: #ffb95f;
+  --color-on-surface: #d9e3f7;
+  --color-on-secondary: #213600;
+  --color-tertiary: #ffb95f;
+  --color-on-secondary-container: #304b00;
+  --color-on-primary-fixed: #002109;
+  --color-surface-variant: #2c3545;
+  --color-surface-container-highest: #2c3545;
+  --color-on-primary-fixed-variant: #005320;
+  --color-outline: #879485;
+  --color-primary-fixed-dim: #62df7d;
+  --color-on-primary: #003914;
+  --color-on-tertiary-fixed: #2a1700;
+  --color-on-background: #d9e3f7;
+  --color-on-tertiary: #472a00;
+  --color-inverse-primary: #006e2d;
+  --color-outline-variant: #3e4a3d;
+  --color-surface-bright: #303a49;
+  --color-secondary-fixed: #b2f746;
+  --color-background: #0a1422;
+  --color-surface-dim: #0a1422;
+  --color-inverse-surface: #d9e3f7;
+  --color-inverse-on-surface: #273140;
+  --color-on-primary-container: #003111;
+  --color-tertiary-container: #ca8100;
+  --color-tertiary-fixed: #ffddb8;
+  --color-on-surface-variant: #bdcaba;
+  --color-primary-container: #1ca64d;
+
+  --spacing-base: 4px;
+  --spacing-panel-padding: 20px;
+  --spacing-margin: 32px;
+  --spacing-container-max: 1920px;
+  --spacing-gutter: 24px;
+
+  --font-headline-lg: "Inter", sans-serif;
+  --font-display-lg: "Inter", sans-serif;
+  --font-headline-lg-mobile: "Inter", sans-serif;
+  --font-metric-xl: "JetBrains Mono", monospace;
+  --font-label-caps: "JetBrains Mono", monospace;
+  --font-status-badge: "JetBrains Mono", monospace;
+  --font-body-md: "Inter", sans-serif;
+  --font-terminal-nano: "JetBrains Mono", monospace;
+}
+
+body {
+  background-color: #07111F; /* Base level canvas as per spec */
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.glass-panel {
+  background-color: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel.interactive:hover {
+  transform: translateY(-4px);
+  border-color: rgba(98, 223, 125, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(98, 223, 125, 0.1);
+}
+
+.hero-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(98, 223, 125, 0.15) 0%, transparent 60%);
+}
+
+.animate-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  animation: pulseRing 2s infinite;
+  opacity: 0;
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Ambient background movement */
+.bg-pan {
+  background-size: 200% 200%;
+  animation: panBg 20s ease infinite;
+}
+
+@keyframes panBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1422; 
+}
+::-webkit-scrollbar-thumb {
+  background: #2c3545; 
+  border-radius: 10px;
+}
+
+.glow-border-active {
+  border-color: rgba(98, 223, 125, 0.4);
+  box-shadow: 0 0 15px rgba(98, 223, 125, 0.15) inset;
+}
+
+.scrolling-log {
+  animation: scrollLog 20s linear infinite;
+}
+@keyframes scrollLog {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* Dynamic Routing Animations */
+.marching-ants {
+  background-image: linear-gradient(90deg, currentColor 50%, transparent 50%);
+  background-size: 12px 2px;
+  background-repeat: repeat-x;
+  animation: marching 0.8s linear infinite;
+}
+
+@keyframes marching {
+  0% { background-position: 0 0; }
+  100% { background-position: -12px 0; }
+}
+
+.arrow-move {
+  animation: arrowMove 1.5s ease-in-out infinite;
+}
+
+@keyframes arrowMove {
+  0% { transform: translateX(-2px); opacity: 0.5; }
+  50% { transform: translateX(4px); opacity: 1; }
+  100% { transform: translateX(-2px); opacity: 0.5; }
+}
+
+.route-card-enter {
+  animation: cardEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardEnter {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.kanban-col {
+  min-height: 200px;
+}
