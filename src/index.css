@@ -50,10 +50,10 @@
   --color-primary-container: #1ca64d;
 
   --spacing-base: 4px;
-  --spacing-panel-padding: 20px;
-  --spacing-margin: 32px;
+  --spacing-panel-padding: 32px;
+  --spacing-margin: 48px;
   --spacing-container-max: 1920px;
-  --spacing-gutter: 24px;
+  --spacing-gutter: 40px;
 
   --font-headline-lg: "Inter", sans-serif;
   --font-display-lg: "Inter", sans-serif;
@@ -66,16 +66,16 @@
 }
 
 body {
-  background-color: #07111F; /* Base level canvas as per spec */
+  background-color: #03080F;
   margin: 0;
   font-family: "Inter", sans-serif;
 }
 
 .glass-panel {
-  background-color: rgba(17, 24, 39, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(6, 16, 30, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -85,16 +85,12 @@ body {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(98, 223, 125, 0.1);
 }
 
-.hero-glow {
-  background: radial-gradient(circle at 50% 50%, rgba(98, 223, 125, 0.15) 0%, transparent 60%);
-}
-
+/* ====== ENTRY ANIMATIONS ====== */
 .animate-up {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
@@ -103,12 +99,10 @@ body {
 .delay-600 { animation-delay: 0.6s; }
 
 @keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 
+/* ====== PULSE RING ====== */
 .pulse-ring {
   position: absolute;
   width: 100%;
@@ -118,81 +112,206 @@ body {
   animation: pulseRing 2s infinite;
   opacity: 0;
 }
-
 @keyframes pulseRing {
   0% { transform: scale(1); opacity: 0.8; }
   100% { transform: scale(1.5); opacity: 0; }
 }
 
-/* Ambient background movement */
-.bg-pan {
-  background-size: 200% 200%;
-  animation: panBg 20s ease infinite;
+/* ====== RADAR SWEEP ====== */
+.radar-sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(98, 223, 125, 0) 0deg,
+    rgba(98, 223, 125, 0.25) 40deg,
+    rgba(98, 223, 125, 0) 60deg
+  );
+  animation: radarSpin 3s linear infinite;
+  transform-origin: center;
+}
+@keyframes radarSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-@keyframes panBg {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* ====== TICKER SCROLL ====== */
+.ticker-scroll {
+  display: flex;
+  white-space: nowrap;
+  animation: tickerMove 45s linear infinite;
+}
+@keyframes tickerMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+/* ====== ALERT POP-IN ====== */
+.alert-enter {
+  animation: alertPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-::-webkit-scrollbar-track {
-  background: #0a1422; 
-}
-::-webkit-scrollbar-thumb {
-  background: #2c3545; 
-  border-radius: 10px;
+@keyframes alertPop {
+  from { opacity: 0; transform: translateX(40px) scale(0.95); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
-.glow-border-active {
-  border-color: rgba(98, 223, 125, 0.4);
-  box-shadow: 0 0 15px rgba(98, 223, 125, 0.15) inset;
+/* ====== CHART LINE DRAW ====== */
+.chart-draw {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: drawLine 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
 }
 
+/* ====== NEON BORDER PULSE ====== */
+.neon-border-pulse {
+  animation: neonPulse 2.5s ease-in-out infinite;
+}
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(98,223,125,0.15), 0 0 10px rgba(98,223,125,0.08); }
+  50% { box-shadow: 0 0 20px rgba(98,223,125,0.45), 0 0 40px rgba(98,223,125,0.18), inset 0 0 8px rgba(98,223,125,0.05); }
+}
+
+/* ====== WAVEFORM BARS ====== */
+.wave-bar {
+  border-radius: 2px;
+  animation: waveAnim 0.8s ease-in-out infinite alternate;
+}
+@keyframes waveAnim {
+  from { transform: scaleY(0.3); opacity: 0.5; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+/* ====== SCROLLING LOG ====== */
 .scrolling-log {
-  animation: scrollLog 20s linear infinite;
+  animation: scrollLog 18s linear infinite;
 }
 @keyframes scrollLog {
   0% { transform: translateY(0); }
   100% { transform: translateY(-50%); }
 }
 
-/* Dynamic Routing Animations */
+/* ====== MARCHING ANTS ====== */
 .marching-ants {
   background-image: linear-gradient(90deg, currentColor 50%, transparent 50%);
   background-size: 12px 2px;
   background-repeat: repeat-x;
   animation: marching 0.8s linear infinite;
 }
-
 @keyframes marching {
   0% { background-position: 0 0; }
   100% { background-position: -12px 0; }
 }
 
-.arrow-move {
-  animation: arrowMove 1.5s ease-in-out infinite;
-}
-
-@keyframes arrowMove {
-  0% { transform: translateX(-2px); opacity: 0.5; }
-  50% { transform: translateX(4px); opacity: 1; }
-  100% { transform: translateX(-2px); opacity: 0.5; }
-}
-
+/* ====== CARD ENTER ====== */
 .route-card-enter {
   animation: cardEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
 @keyframes cardEnter {
   from { opacity: 0; transform: scale(0.95) translateY(10px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.kanban-col {
-  min-height: 200px;
+/* ====== SCANNING LINE ====== */
+.scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(98,223,125,0.7), transparent);
+  animation: scanDown 3.5s linear infinite;
+}
+@keyframes scanDown {
+  0% { top: 0; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ====== NUM FLIP ====== */
+.num-flip {
+  animation: numFlip 0.25s ease-out;
+}
+@keyframes numFlip {
+  0% { transform: translateY(-8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ====== GLOW BORDER ACTIVE ====== */
+.glow-border-active {
+  border-color: rgba(98, 223, 125, 0.4);
+  box-shadow: 0 0 15px rgba(98, 223, 125, 0.15) inset;
+}
+
+/* ====== HERO GLOW ====== */
+.hero-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(98, 223, 125, 0.15) 0%, transparent 60%);
+}
+
+/* ====== CUSTOM SCROLLBAR ====== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #03080F; }
+::-webkit-scrollbar-thumb { background: #1a2535; border-radius: 10px; }
+
+/* ====== INCIDENT BADGE SHAKE ====== */
+.incident-shake {
+  animation: incidentShake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes incidentShake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-3px); }
+  40%, 60% { transform: translateX(3px); }
+}
+
+/* ====== FLOW PATH ANIMATION ====== */
+@keyframes moveDotAlongPath {
+  0%   { opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ====== SMOOTH PAGE TRANSITIONS ====== */
+.page-enter {
+  animation: pageEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== BUTTON HOVER GLOW ====== */
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(98, 223, 125, 0.2), 0 0 40px rgba(98, 223, 125, 0.08);
+}
+
+/* ====== FOCUS RING ====== */
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 2px rgba(98, 223, 125, 0.15);
+}
+
+/* ====== HIDE SCROLLBAR ====== */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ====== RESPONSIVE GLASS PANEL ====== */
+@media (max-width: 768px) {
+  .glass-panel {
+    padding: 1rem;
+  }
+}
+
+/* ====== IMPROVED TRANSITIONS ====== */
+* {
+  scroll-behavior: smooth;
+}
+
+/* ====== GRADIENT TEXT HELPER ====== */
+.text-gradient {
+  background: linear-gradient(135deg, #62df7d, #9ddf2e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

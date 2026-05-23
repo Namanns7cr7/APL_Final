@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import Hero from '../components/Hero'
 import Metrics from '../components/Metrics'
 import Map from '../components/Map'
 import GeminiCommand from '../components/GeminiCommand'
@@ -37,9 +36,36 @@ export default function DynamicRouting() {
   }
 
   return (
-    <div className="pb-24 text-on-surface">
-      {/* Hero */}
-      <Hero onSimulateClick={handleSimulateClick} />
+    <div className="pb-12 text-on-surface pt-16">
+      {/* Tactical Hub Header */}
+      <header className="relative w-full border-b border-white/8 bg-[#040A12]/40 backdrop-blur-md overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,185,95,0.06)_0%,transparent_60%)] pointer-events-none" />
+        <div className="container mx-auto px-margin max-w-container-max py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative z-10">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-tertiary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>
+                route
+              </span>
+              <span className="font-mono text-[9px] text-tertiary tracking-widest uppercase font-black">AI Crowd Flow Optimizer</span>
+            </div>
+            <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight uppercase">AI Smart Routing</h1>
+            <p className="text-xs text-on-surface-variant font-mono max-w-xl">
+              Live pedestrian bypass networks, flow pressure shifting, and AI-powered dynamic routing paths for 90,000 fans — mapped in real-time.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 bg-surface/40 border border-white/8 rounded-2xl p-4 shadow-xl">
+            <div className="flex flex-col">
+              <span className="text-[8px] font-mono text-on-surface-variant uppercase tracking-wider font-bold">ROUTING OVERVIEW</span>
+              <span className="text-sm font-bold text-white font-mono uppercase mt-0.5">Active Routes: 6 Pathsets</span>
+            </div>
+            <div className="w-[1px] h-8 bg-white/10 mx-1" />
+            <span className="flex items-center gap-1.5 text-[9px] font-mono font-black text-tertiary uppercase tracking-widest bg-tertiary/10 border border-tertiary/20 px-3 py-1 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+              ACTIVE
+            </span>
+          </div>
+        </div>
+      </header>
 
       {/* Metrics */}
       <Metrics 
@@ -70,8 +96,8 @@ export default function DynamicRouting() {
 
       {/* Dynamic Routing Cards */}
       <section ref={simulationRef} className="container mx-auto px-margin max-w-container-max scroll-mt-20 mb-12">
-        <div className="glass-panel rounded-xl flex flex-col border-outline-variant p-6">
-          <div className="flex justify-between items-center mb-6 border-b border-white/10 pb-3">
+        <div className="glass-panel rounded-xl flex flex-col border-outline-variant p-8">
+          <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>
                 route
@@ -85,7 +111,7 @@ export default function DynamicRouting() {
           </div>
 
           {/* Route Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {scenario.routes.map((route, index) => {
               const active = selectedRouteId === route.id
               const txtColor = textColors[route.color] || 'text-primary'
@@ -155,12 +181,12 @@ export default function DynamicRouting() {
       </section>
 
       {/* Protocol Toggle */}
-      <section className="container mx-auto px-margin max-w-container-max">
-        <div className="glass-panel rounded-xl border-outline-variant p-6">
-          <div className="flex justify-between items-center mb-6 border-b border-white/10 pb-3">
+      <section className="container mx-auto px-margin max-w-container-max mb-12">
+        <div className="glass-panel rounded-xl border-outline-variant p-8">
+          <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
             <h2 className="font-label-caps text-xs text-primary tracking-widest uppercase">SELECT ROUTING SCENARIO</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <button 
               onClick={() => { setScenarioId('default'); setSelectedRouteId(null); }}
               className={`glass-panel p-4 rounded text-left border hover:border-primary/40 hover:bg-white/5 transition-all cursor-pointer group flex justify-between items-center ${
