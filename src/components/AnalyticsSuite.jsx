@@ -21,14 +21,14 @@ export default function AnalyticsSuite({ analytics }) {
 
   // Map entry data coordinates
   const entryPoints = flowVelocity.map((d, i) => {
-    const x = padding + (i / (flowVelocity.length - 1)) * chartWidth
+    const x = flowVelocity.length === 1 ? padding + chartWidth / 2 : padding + (i / (flowVelocity.length - 1)) * chartWidth
     const y = padding + chartHeight - (d.entry / maxVal) * chartHeight
     return { x, y }
   })
 
   // Map exit data coordinates
   const exitPoints = flowVelocity.map((d, i) => {
-    const x = padding + (i / (flowVelocity.length - 1)) * chartWidth
+    const x = flowVelocity.length === 1 ? padding + chartWidth / 2 : padding + (i / (flowVelocity.length - 1)) * chartWidth
     const y = padding + chartHeight - (d.exit / maxVal) * chartHeight
     return { x, y }
   })
@@ -197,7 +197,7 @@ export default function AnalyticsSuite({ analytics }) {
 
               {/* X Axis Labels */}
               {flowVelocity.map((d, idx) => {
-                const x = padding + (idx / (flowVelocity.length - 1)) * chartWidth
+                const x = flowVelocity.length === 1 ? padding + chartWidth / 2 : padding + (idx / (flowVelocity.length - 1)) * chartWidth
                 return (
                   <text 
                     key={idx} 
