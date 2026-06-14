@@ -11,6 +11,8 @@ import SplashScreen from './components/SplashScreen'
 function App() {
   const [showSplash, setShowSplash] = useState(true)
 
+  // Assuming App itself does not fetch data for AnalyticsSuite, so no loading/error to pass here
+
   return (
     <Router>
       {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
